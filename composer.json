@@ -1,0 +1,17 @@
+{
+  "name": "badams/microsoft-translator",
+  "authors": [
+    {
+      "name": "Byron Adams",
+      "email": "byron.adams54@gmail.com"
+    }
+  ],
+  "require": {
+    "guzzlehttp/guzzle": "~4.2.0"
+  },
+  "autoload": {
+    "psr-4": {
+      "badams\\MicrosoftTranslator\\": "src/"
+    }
+  }
+}
