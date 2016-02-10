@@ -161,16 +161,16 @@ class MicrosoftTranslator
     {
         $message = strip_tags($response->getBody());
 
-        if (strpos($message, 'Argument Exception') === 0 && strpos($message, 'The incoming token has expired.')) {
-            throw new TokenExpiredException($message);
+        if (strpos($message, 'Argument Exception') === 0) {
+            if (strstr($message, 'The incoming token has expired.')) {
+                throw new TokenExpiredException($message);
+            }
+
+            throw new ArgumentException($message);
         }
 
         if (strpos($message, 'TranslateApiException') === 0 && strpos($message, 'credentials has zero balance.')) {
             throw new QuotaExceededException($message);
-        }
-
-        if (strpos($message, 'Argument Exception') === 0) {
-            throw new ArgumentException($message);
         }
     }
 
