@@ -7,7 +7,6 @@ use badams\MicrosoftTranslator\Exceptions\QuotaExceededException;
 use badams\MicrosoftTranslator\Exceptions\RecoverableException;
 use badams\MicrosoftTranslator\Exceptions\TokenExpiredException;
 use badams\MicrosoftTranslator\Exceptions\TranslatorException;
-use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
 /**
@@ -42,9 +41,14 @@ class MicrosoftTranslator
     private $grantType = 'client_credentials';
 
     /**
-     * @var array
+     * @var string
      */
-    private $clients = [];
+    private $clientId;
+
+    /**
+     * @var string
+     */
+    private $clientSecret;
 
     /**
      * @var string
@@ -54,32 +58,23 @@ class MicrosoftTranslator
     /**
      * MicrosoftTranslator constructor.
      */
-    public function __construct(/*ClientInterface $client*/)
+    public function __construct(\GuzzleHttp\ClientInterface $httpClient = null)
     {
-        $this->http = new Client([
-            'base_url' => self::BASE_URL,
-        ]);
+        if (is_null($httpClient)) {
+            $httpClient = new \GuzzleHttp\Client();
+        }
+
+        $this->http = $httpClient;
     }
 
     /**
      * @param $id
      * @param $secret
      */
-    public function addClient($id, $secret)
+    public function setClient($id, $secret)
     {
-        $this->clients[] = ['client_id' => $id, 'client_secret' => $secret];
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getClient()
-    {
-        if (empty($this->clients)) {
-            throw new TranslatorException('No clients found');
-        }
-
-        return reset($this->clients);
+        $this->clientId = $id;
+        $this->clientSecret = $secret;
     }
 
     /**
@@ -90,8 +85,10 @@ class MicrosoftTranslator
     {
         $params = array_merge([
             'grant_type' => $this->grantType,
-            'scope' => $this->scope
-        ], $this->getClient());
+            'scope' => $this->scope,
+            'client_id' => $this->clientId,
+            'client_secret' => $this->clientSecret
+        ]);
 
         try {
             $response = $this->http->post(self::AUTH_URL, ['body' => $params]);
@@ -118,7 +115,7 @@ class MicrosoftTranslator
             $this->updateAccessToken();
         }
 
-        $request = $this->http->createRequest($method, $action, [
+        $request = $this->http->createRequest($method, self::BASE_URL . $action, [
             'exceptions' => false,
             'headers' => [
                 'Authorization' => 'Bearer ' . $this->accessToken,
