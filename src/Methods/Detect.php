@@ -15,10 +15,8 @@ class Detect implements \badams\MicrosoftTranslator\ApiMethodInterface
     protected $text;
 
     /**
-     * Translate constructor.
+     * Detect constructor.
      * @param $text
-     * @param $to
-     * @param null $from
      */
     public function __construct($text)
     {

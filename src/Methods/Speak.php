@@ -36,10 +36,11 @@ class Speak implements \badams\MicrosoftTranslator\ApiMethodInterface
     protected $options;
 
     /**
-     * Translate constructor.
+     * Speak constructor.
      * @param $text
-     * @param $to
-     * @param null $from
+     * @param $language
+     * @param string $format
+     * @param string $options
      */
     public function __construct($text, $language, $format = Speak::FORMAT_MP3, $options = Speak::OPTION_MAX_QUALITY)
     {
