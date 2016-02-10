@@ -4,7 +4,6 @@ namespace badams\MicrosoftTranslator;
 use badams\MicrosoftTranslator\Exceptions\ArgumentException;
 use badams\MicrosoftTranslator\Exceptions\AuthException;
 use badams\MicrosoftTranslator\Exceptions\QuotaExceededException;
-use badams\MicrosoftTranslator\Exceptions\RecoverableException;
 use badams\MicrosoftTranslator\Exceptions\TokenExpiredException;
 use badams\MicrosoftTranslator\Exceptions\TranslatorException;
 use GuzzleHttp\Exception\RequestException;
@@ -26,7 +25,7 @@ class MicrosoftTranslator
     const BASE_URL = 'http://api.microsofttranslator.com/V2/Http.svc/';
 
     /**
-     * @var Client
+     * @var \GuzzleHttp\ClientInterface
      */
     private $http;
 
@@ -106,7 +105,7 @@ class MicrosoftTranslator
     }
 
     /**
-     * @param $action
+     * @param string $action
      * @param $params
      * @param string $method
      * @return null|string
@@ -168,7 +167,7 @@ class MicrosoftTranslator
      * @param $text
      * @param $to
      * @param $from
-     * @return mixed
+     * @return null|string
      */
     public function translate($text, $to, $from)
     {
