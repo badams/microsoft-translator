@@ -139,7 +139,9 @@ class MicrosoftTranslator
 
         if ($response->getStatusCode() != 200) {
             try {
-                $this->processError($response);
+                $message = strip_tags($response->getBody());
+                $this->assertNoArgumentException($message);
+                $this->assertNoTranslateExceptionAndZeroBalance($message);
             } catch (TokenExpiredException $e) {
                 $this->accessToken = null;
                 return $this->execute($method);
@@ -152,25 +154,31 @@ class MicrosoftTranslator
     }
 
     /**
-     * @param ResponseInterface $response
-     * @throws ArgumentException
+     * @param string $message
      * @throws QuotaExceededException
+     */
+    function assertNoTranslateExceptionAndZeroBalance($message)
+    {
+        if (strpos($message, 'TranslateApiException') === 0
+            && strpos($message, 'credentials has zero balance.')
+        ){
+            throw new QuotaExceededException($message);
+        }
+    }
+
+    /**
+     * @param string $message
+     * @throws ArgumentException
      * @throws TokenExpiredException
      */
-    private function processError(ResponseInterface $response)
+    function assertNoArgumentException($message)
     {
-        $message = strip_tags($response->getBody());
-
         if (strpos($message, 'Argument Exception') === 0) {
-            if (strstr($message, 'The incoming token has expired.')) {
+            if (strpos($message, 'The incoming token has expired.')) {
                 throw new TokenExpiredException($message);
             }
 
             throw new ArgumentException($message);
-        }
-
-        if (strpos($message, 'TranslateApiException') === 0 && strpos($message, 'credentials has zero balance.')) {
-            throw new QuotaExceededException($message);
         }
     }
 
