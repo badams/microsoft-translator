@@ -194,4 +194,17 @@ class MicrosoftTranslator
     {
         return $this->execute(new Detect($text));
     }
+
+    /**
+     * @param $text
+     * @param $language
+     * @param string $format
+     * @param string $options
+     * @return mixed
+     * @throws TranslatorException
+     */
+    public function speak($text, $language, $format = Speak::FORMAT_MP3, $options = Speak::OPTION_MAX_QUALITY)
+    {
+        return $this->execute(new Speak($text, $language, $format, $options));
+    }
 }
