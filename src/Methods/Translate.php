@@ -3,6 +3,7 @@
 namespace badams\MicrosoftTranslator\Methods;
 
 use badams\MicrosoftTranslator\ApiMethodInterface;
+use GuzzleHttp\Message\ResponseInterface;
 
 /**
  * Class Translate
@@ -58,10 +59,10 @@ class Translate implements ApiMethodInterface
     }
 
     /**
-     * @param \GuzzleHttp\Message\Response $response
+     * @param ResponseInterface $response
      * @return string
      */
-    public function processResponse(\GuzzleHttp\Message\Response $response)
+    public function processResponse(\GuzzleHttp\Message\ResponseInterface $response)
     {
         $xml = (array)simplexml_load_string($response->getBody()->getContents());
         return (string)$xml[0];

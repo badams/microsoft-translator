@@ -8,7 +8,7 @@ use badams\MicrosoftTranslator\Exceptions\TokenExpiredException;
 use badams\MicrosoftTranslator\Exceptions\TranslatorException;
 use badams\MicrosoftTranslator\Methods\Translate;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Message\Response;
+use GuzzleHttp\Message\ResponseInterface;
 
 /**
  * Class MicrosoftTranslator
@@ -150,13 +150,12 @@ class MicrosoftTranslator
     }
 
     /**
-     * @param string $message
+     * @param ResponseInterface $response
      * @throws ArgumentException
      * @throws QuotaExceededException
      * @throws TokenExpiredException
-     * @throws TranslatorException
      */
-    private function processError(Response $response)
+    private function processError(ResponseInterface $response)
     {
         $message = strip_tags($response->getBody());
 

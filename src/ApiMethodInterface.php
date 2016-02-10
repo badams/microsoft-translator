@@ -19,8 +19,8 @@ interface ApiMethodInterface
     public function getRequestOptions();
 
     /**
-     * @param \GuzzleHttp\Message\Response $response
+     * @param \GuzzleHttp\Message\ResponseInterface $response
      * @return mixed
      */
-    public function processResponse(\GuzzleHttp\Message\Response $response);
+    public function processResponse(\GuzzleHttp\Message\ResponseInterface $response);
 }
