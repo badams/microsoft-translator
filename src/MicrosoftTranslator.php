@@ -6,6 +6,8 @@ use badams\MicrosoftTranslator\Exceptions\AuthException;
 use badams\MicrosoftTranslator\Exceptions\QuotaExceededException;
 use badams\MicrosoftTranslator\Exceptions\TokenExpiredException;
 use badams\MicrosoftTranslator\Exceptions\TranslatorException;
+use badams\MicrosoftTranslator\Methods\Detect;
+use badams\MicrosoftTranslator\Methods\Speak;
 use badams\MicrosoftTranslator\Methods\Translate;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Message\ResponseInterface;
@@ -181,5 +183,15 @@ class MicrosoftTranslator
     public function translate($text, $to, $from = null)
     {
         return $this->execute(new Translate($text, $to, $from));
+    }
+
+    /**
+     * @param $text
+     * @return null|string
+     * @throws TranslatorException
+     */
+    public function detect($text)
+    {
+        return $this->execute(new Detect($text));
     }
 }
