@@ -1,6 +1,7 @@
 microsoft-translator
 ================================
 
+[![Build Status](https://travis-ci.org/badams/microsoft-translator.svg?branch=master)](https://travis-ci.org/badams/microsoft-translator)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/badams/microsoft-translator/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/badams/microsoft-translator/?branch=master)
 
 PHP implementation of [Microsoft's Translator API](https://msdn.microsoft.com/en-us/library/ff512419.aspx)
