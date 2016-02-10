@@ -6,7 +6,9 @@ use badams\MicrosoftTranslator\Exceptions\AuthException;
 use badams\MicrosoftTranslator\Exceptions\QuotaExceededException;
 use badams\MicrosoftTranslator\Exceptions\TokenExpiredException;
 use badams\MicrosoftTranslator\Exceptions\TranslatorException;
+use badams\MicrosoftTranslator\Methods\Translate;
 use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Message\Response;
 
 /**
  * Class MicrosoftTranslator
@@ -104,41 +106,47 @@ class MicrosoftTranslator
         return $this->accessToken;
     }
 
-    /**
-     * @param string $action
-     * @param $params
-     * @param string $method
-     * @return null|string
-     * @throws ArgumentException
-     * @throws AuthException
-     */
-    private function request($action, $params, $method = 'GET')
+    private function createRequest(ApiMethodInterface $method)
     {
-        $request = $this->http->createRequest($method, self::BASE_URL . $action, [
-            'exceptions' => false,
-            'headers' => [
-                'Authorization' => 'Bearer ' . $this->getAccessToken(),
-                'Content-Type' => 'text/xml',
-            ],
-            'query' => $params,
-        ]);
+        $reflection = new \ReflectionClass($method);
 
-        $response = $this->http->send($request);
-        $result = (string)$response->getBody();
+        return $this->http->createRequest(
+            $method->getRequestMethod(),
+            self::BASE_URL . $reflection->getShortName(),
+            array_merge([
+                'exceptions' => false,
+                'headers' => [
+                    'Authorization' => 'Bearer ' . $this->getAccessToken(),
+                    'Content-Type' => 'text/xml',
+                ],
 
-        if ($response->getStatusCode() == 200) {
-            $xml = (array)simplexml_load_string($result);
-            return (string)$xml[0];
+            ], $method->getRequestOptions())
+        );
+    }
+
+    /**
+     * @param ApiMethodInterface $method
+     * @return mixed
+     * @throws ArgumentException
+     * @throws QuotaExceededException
+     * @throws TranslatorException
+     */
+    private function execute(ApiMethodInterface $method)
+    {
+        $response = $this->http->send($this->createRequest($method));
+
+        if ($response->getStatusCode() != 200) {
+            try {
+                $this->processError($response);
+            } catch (TokenExpiredException $e) {
+                $this->accessToken = null;
+                return $this->execute($method);
+            }
+
+            throw new TranslatorException($response->getBody());
         }
 
-        try {
-            $this->processError(strip_tags($result));
-        } catch (TokenExpiredException $e) {
-            $this->accessToken = null;
-            return $this->request($action, $params, $method);
-        }
-
-        throw new TranslatorException($result);
+        return $method->processResponse($response);
     }
 
     /**
@@ -148,8 +156,10 @@ class MicrosoftTranslator
      * @throws TokenExpiredException
      * @throws TranslatorException
      */
-    private function processError($message)
+    private function processError(Response $response)
     {
+        $message = strip_tags($response->getBody());
+
         if (strpos($message, 'Argument Exception') === 0 && strpos($message, 'The incoming token has expired.')) {
             throw new TokenExpiredException($message);
         }
@@ -169,12 +179,8 @@ class MicrosoftTranslator
      * @param $from
      * @return null|string
      */
-    public function translate($text, $to, $from)
+    public function translate($text, $to, $from = null)
     {
-        return $this->request('Translate', [
-            'to' => $to,
-            'from' => $from,
-            'text' => $text,
-        ]);
+        return $this->execute(new Translate($text, $to, $from));
     }
 }
