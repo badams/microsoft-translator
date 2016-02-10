@@ -10,7 +10,6 @@ use badams\MicrosoftTranslator\Methods\Detect;
 use badams\MicrosoftTranslator\Methods\Speak;
 use badams\MicrosoftTranslator\Methods\Translate;
 use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Message\ResponseInterface;
 
 /**
  * Class MicrosoftTranslator
@@ -161,7 +160,7 @@ class MicrosoftTranslator
     {
         if (strpos($message, 'TranslateApiException') === 0
             && strpos($message, 'credentials has zero balance.')
-        ){
+        ) {
             throw new QuotaExceededException($message);
         }
     }
