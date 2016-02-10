@@ -151,20 +151,17 @@ class MicrosoftTranslator
      */
     private function processError($message)
     {
-        if (strpos($message, 'Argument ExceptionMethod:') == 0 && strpos($message, 'The incoming token has expired.')) {
+        if (strpos($message, 'Argument Exception') === 0 && strpos($message, 'The incoming token has expired.')) {
             throw new TokenExpiredException($message);
         }
 
-        if (strpos($message, 'TranslateApiExceptionMethod:') == 0 && strpos($message, 'credentials has zero balance.')) {
-            array_shift($this->clients);
+        if (strpos($message, 'TranslateApiException') === 0 && strpos($message, 'credentials has zero balance.')) {
             throw new QuotaExceededException($message);
         }
 
-        if (strpos($message, 'Argument ExceptionMethod:') == 0) {
+        if (strpos($message, 'Argument Exception') === 0) {
             throw new ArgumentException($message);
         }
-
-        throw new TranslatorException($message);
     }
 
     /**
