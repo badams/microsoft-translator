@@ -137,12 +137,12 @@ class MicrosoftTranslator
 
         try {
             $this->processError(strip_tags($result));
-        } catch (RecoverableException $e) {
+        } catch (TokenExpiredException $e) {
             $this->accessToken = null;
             return $this->request($action, $params, $method);
         }
 
-        return null;
+        throw new TranslatorException($result);
     }
 
     /**

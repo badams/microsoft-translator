@@ -6,7 +6,7 @@ namespace badams\MicrosoftTranslator\Exceptions;
  * Class TokenExpiredException
  * @package badams\MicrosoftTranslator\Exceptions
  */
-class TokenExpiredException extends RecoverableException
+class TokenExpiredException extends TranslatorException
 {
 
 }
