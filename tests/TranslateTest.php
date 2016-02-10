@@ -1,9 +1,11 @@
 <?php
 
+namespace badams\MicrosoftTranslator\Tests;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
-
+use GuzzleHttp\Stream\Stream;
 
 class TranslateTest extends \PHPUnit_Framework_TestCase
 {
@@ -11,11 +13,11 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client();
 
-        $content = GuzzleHttp\Stream\Stream::factory('{"access_token":"123"}');
+        $content = Stream::factory('{"access_token":"123"}');
 
         $mock = new Mock([
             new Response(200, [], $content),
-            new Response(200, [], GuzzleHttp\Stream\Stream::factory('<string>Hallo</string>')),
+            new Response(200, [], Stream::factory('<string>Hallo</string>')),
         ]);
 
         $client->getEmitter()->attach($mock);

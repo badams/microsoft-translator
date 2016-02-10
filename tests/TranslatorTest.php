@@ -1,5 +1,7 @@
 <?php
 
+namespace badams\MicrosoftTranslator\Tests;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
@@ -18,7 +20,7 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
     public function testConstructor()
     {
         $translator = new MicrosoftTranslator();
-        $reflection = new ReflectionClass($translator);
+        $reflection = new \ReflectionClass($translator);
         $client = $reflection->getProperty('http');
         $client->setAccessible(true);
         $this->assertNotNull($client->getValue($translator));

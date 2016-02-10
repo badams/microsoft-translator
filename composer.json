@@ -11,7 +11,8 @@
   },
   "autoload": {
     "psr-4": {
-      "badams\\MicrosoftTranslator\\": "src/"
+      "badams\\MicrosoftTranslator\\": "src/",
+      "badams\\MicrosoftTranslator\\Tests\\" : "tests/"
     }
   },
   "require-dev": {

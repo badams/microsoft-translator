@@ -1,22 +1,25 @@
 <?php
 
+namespace badams\MicrosoftTranslator\Tests;
+
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
 use badams\MicrosoftTranslator\MicrosoftTranslator;
+use GuzzleHttp\Stream\Stream;
 
 class AuthTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetClient()
     {
         $client = new Client();
-        $content = GuzzleHttp\Stream\Stream::factory('{"access_token":"valid"}');
+        $content = Stream::factory('{"access_token":"valid"}');
         $mock = new Mock([new Response(200, [], $content)]);
         $client->getEmitter()->attach($mock);
 
         $translator = new MicrosoftTranslator($client);
 
-        $reflection = new ReflectionClass($translator);
+        $reflection = new \ReflectionClass($translator);
 
         $translator->setClient('client_id', 'client_secret');
 
@@ -34,7 +37,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
     {
         $client = new Client();
 
-        $content = GuzzleHttp\Stream\Stream::factory('{"error" : "invalid_client", "error_description" : "ACS50012: Authentication failed."}');
+        $content = Stream::factory('{"error" : "invalid_client", "error_description" : "ACS50012: Authentication failed."}');
 
         $mock = new Mock([
             new Response(400, [], $content),
@@ -50,7 +53,7 @@ class AuthTest extends \PHPUnit_Framework_TestCase
             'ACS50012: Authentication failed.'
         );
 
-        $reflection = new ReflectionClass($translator);
+        $reflection = new \ReflectionClass($translator);
         $accessToken = $reflection->getMethod('getAccessToken');
         $accessToken->setAccessible(true);
         $accessToken->invoke($translator);
