@@ -81,24 +81,28 @@ class MicrosoftTranslator
      * @return mixed
      * @throws AuthException
      */
-    private function updateAccessToken()
+    private function getAccessToken()
     {
-        $params = array_merge([
-            'grant_type' => $this->grantType,
-            'scope' => $this->scope,
-            'client_id' => $this->clientId,
-            'client_secret' => $this->clientSecret
-        ]);
+        if (!$this->accessToken) {
+            $params = array_merge([
+                'grant_type' => $this->grantType,
+                'scope' => $this->scope,
+                'client_id' => $this->clientId,
+                'client_secret' => $this->clientSecret
+            ]);
 
-        try {
-            $response = $this->http->post(self::AUTH_URL, ['body' => $params]);
-            $result = json_decode((string)$response->getBody());
-        } catch (RequestException $e) {
-            $result = json_decode((string)$e->getResponse()->getBody());
-            throw new AuthException($result->error_description);
+            try {
+                $response = $this->http->post(self::AUTH_URL, ['body' => $params]);
+                $result = json_decode((string)$response->getBody());
+            } catch (RequestException $e) {
+                $result = json_decode((string)$e->getResponse()->getBody());
+                throw new AuthException($result->error_description);
+            }
+
+            $this->accessToken = $result->access_token;
         }
 
-        $this->accessToken = $result->access_token;
+        return $this->accessToken;
     }
 
     /**
@@ -111,14 +115,10 @@ class MicrosoftTranslator
      */
     private function request($action, $params, $method = 'GET')
     {
-        if (!$this->accessToken) {
-            $this->updateAccessToken();
-        }
-
         $request = $this->http->createRequest($method, self::BASE_URL . $action, [
             'exceptions' => false,
             'headers' => [
-                'Authorization' => 'Bearer ' . $this->accessToken,
+                'Authorization' => 'Bearer ' . $this->getAccessToken(),
                 'Content-Type' => 'text/xml',
             ],
             'query' => $params,

@@ -51,9 +51,9 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         );
 
         $reflection = new ReflectionClass($translator);
-        $updateAccessToken = $reflection->getMethod('updateAccessToken');
-        $updateAccessToken->setAccessible(true);
-        $updateAccessToken->invoke($translator);
+        $accessToken = $reflection->getMethod('getAccessToken');
+        $accessToken->setAccessible(true);
+        $accessToken->invoke($translator);
     }
 
 
