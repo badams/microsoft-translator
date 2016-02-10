@@ -2,14 +2,11 @@
 
 namespace badams\MicrosoftTranslator\Methods;
 
-use badams\MicrosoftTranslator\ApiMethodInterface;
-use GuzzleHttp\Message\ResponseInterface;
-
 /**
  * Class Translate
  * @package badams\MicrosoftTranslator\Methods
  */
-class Translate implements ApiMethodInterface
+class Translate implements \badams\MicrosoftTranslator\ApiMethodInterface
 {
     /**
      * @var string
@@ -39,6 +36,9 @@ class Translate implements ApiMethodInterface
         $this->from = $from;
     }
 
+    /**
+     * @return string
+     */
     public function getRequestMethod()
     {
         return 'GET';
@@ -59,7 +59,7 @@ class Translate implements ApiMethodInterface
     }
 
     /**
-     * @param ResponseInterface $response
+     * @param \GuzzleHttp\Message\ResponseInterface $response
      * @return string
      */
     public function processResponse(\GuzzleHttp\Message\ResponseInterface $response)
