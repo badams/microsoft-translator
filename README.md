@@ -55,7 +55,7 @@ $language = $translator->detect('Salut tout le monde!');
 echo $language; // fr
 echo $language->getEnglishName(); // French
 
-``
+```
 
 Returns a wave or mp3 stream of the passed-in text being spoken in the desired language.
 
@@ -65,7 +65,7 @@ $data = $translator->speak('Salut tout le monde!', 'fr');
 header('Content-Type: audio/mp3');
 echo base64_decode($data);
 
-``
+```
 
 
 ## Testing
