@@ -156,7 +156,7 @@ class MicrosoftTranslator
      * @param string $message
      * @throws QuotaExceededException
      */
-    function assertNoTranslateExceptionAndZeroBalance($message)
+    private function assertNoTranslateExceptionAndZeroBalance($message)
     {
         if (strpos($message, 'TranslateApiException') === 0
             && strpos($message, 'credentials has zero balance.')
@@ -170,7 +170,7 @@ class MicrosoftTranslator
      * @throws ArgumentException
      * @throws TokenExpiredException
      */
-    function assertNoArgumentException($message)
+    private function assertNoArgumentException($message)
     {
         if (strpos($message, 'Argument Exception') === 0) {
             if (strpos($message, 'The incoming token has expired.')) {
