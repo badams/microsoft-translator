@@ -1,6 +1,7 @@
 <?php
 
 namespace badams\MicrosoftTranslator\Methods;
+use badams\MicrosoftTranslator\Language;
 
 /**
  * Class Speak
@@ -16,7 +17,7 @@ class Speak implements \badams\MicrosoftTranslator\ApiMethodInterface
     const OPTION_MIN_SIZE = 'MinSize';
 
     /**
-     * @var string
+     * @var Language
      */
     protected $language;
 
@@ -45,7 +46,7 @@ class Speak implements \badams\MicrosoftTranslator\ApiMethodInterface
     public function __construct($text, $language, $format = Speak::FORMAT_MP3, $options = Speak::OPTION_MAX_QUALITY)
     {
         $this->text = $text;
-        $this->language = $language;
+        $this->language = new Language($language);
         $this->format = $format;
         $this->options = $options;
     }
@@ -65,7 +66,7 @@ class Speak implements \badams\MicrosoftTranslator\ApiMethodInterface
     {
         return ['query' => [
             'text' => $this->text,
-            'language' => $this->language,
+            'language' => (string)$this->language,
             'format' => $this->format,
             'options' => $this->options,
         ]];

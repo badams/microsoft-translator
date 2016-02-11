@@ -2,6 +2,7 @@
 
 namespace badams\MicrosoftTranslator\Tests;
 
+use badams\MicrosoftTranslator\Methods\Translate;
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
@@ -28,4 +29,13 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Hallo', $translator->translate('Hello', 'de', 'en'));
     }
 
+    public function testInvalidLanguage()
+    {
+        $this->setExpectedException(
+            '\badams\MicrosoftTranslator\Exceptions\UnsupportedLanguageException',
+            'foo is not a supported language code'
+        );
+
+        new Translate('Foo Bar', 'foo');
+    }
 }

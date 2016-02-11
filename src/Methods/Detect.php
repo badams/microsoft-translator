@@ -1,6 +1,7 @@
 <?php
 
 namespace badams\MicrosoftTranslator\Methods;
+use badams\MicrosoftTranslator\Language;
 
 /**
  * Class Detect
@@ -41,12 +42,12 @@ class Detect implements \badams\MicrosoftTranslator\ApiMethodInterface
 
     /**
      * @param \GuzzleHttp\Message\ResponseInterface $response
-     * @return string
+     * @return Language
      */
     public function processResponse(\GuzzleHttp\Message\ResponseInterface $response)
     {
         $xml = (array)simplexml_load_string($response->getBody()->getContents());
-        return (string)$xml[0];
+        return new Language((string)$xml[0]);
     }
 
 

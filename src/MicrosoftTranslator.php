@@ -194,7 +194,7 @@ class MicrosoftTranslator
 
     /**
      * @param $text
-     * @return null|string
+     * @return null|Language
      * @throws TranslatorException
      */
     public function detect($text)

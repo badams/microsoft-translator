@@ -2,6 +2,7 @@
 
 namespace badams\MicrosoftTranslator\Tests;
 
+use badams\MicrosoftTranslator\Methods\Speak;
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
@@ -28,4 +29,13 @@ class SpeakTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('AUDIO_DATA', $output);
     }
 
+    public function testInvalidLanguage()
+    {
+        $this->setExpectedException(
+            '\badams\MicrosoftTranslator\Exceptions\UnsupportedLanguageException',
+            'foobar is not a supported language code'
+        );
+
+        new Speak('Foo Bar', 'foobar');
+    }
 }

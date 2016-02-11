@@ -1,6 +1,7 @@
 <?php
 
 namespace badams\MicrosoftTranslator\Methods;
+use badams\MicrosoftTranslator\Language;
 
 /**
  * Class Translate
@@ -14,7 +15,7 @@ class Translate implements \badams\MicrosoftTranslator\ApiMethodInterface
     protected $text;
 
     /**
-     * @var string
+     * @var Language
      */
     protected $to;
 
@@ -32,8 +33,10 @@ class Translate implements \badams\MicrosoftTranslator\ApiMethodInterface
     public function __construct($text, $to, $from = null)
     {
         $this->text = $text;
-        $this->to = $to;
-        $this->from = $from;
+        $this->to = new Language($to);
+        if ($from) {
+            $this->from = new Language($from);
+        }
     }
 
     /**
@@ -52,8 +55,8 @@ class Translate implements \badams\MicrosoftTranslator\ApiMethodInterface
         return [
             'query' => [
                 'text' => $this->text,
-                'to' => $this->to,
-                'from' => $this->from,
+                'to' => (string)$this->to,
+                'from' => (string)$this->from,
             ]
         ];
     }

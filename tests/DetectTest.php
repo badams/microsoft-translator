@@ -24,7 +24,11 @@ class DetectTest extends \PHPUnit_Framework_TestCase
         $translator = new \badams\MicrosoftTranslator\MicrosoftTranslator($client);
         $translator->setClient('client_id', 'client_secret');
 
-        $this->assertEquals('en', $translator->detect('Hello'));
+        $result = $translator->detect('Hello');
+
+        $this->assertInstanceOf('\badams\MicrosoftTranslator\Language', $result);
+        $this->assertEquals('en', (string)$result);
+        $this->assertEquals('English', $result->getEnglishName());
     }
 
 }
