@@ -1,14 +1,33 @@
 <?php
-
 namespace badams\MicrosoftTranslator\Methods;
+
+use badams\MicrosoftTranslator\Exceptions\ArgumentException;
 use badams\MicrosoftTranslator\Language;
 
 /**
  * Class Translate
+ *
  * @package badams\MicrosoftTranslator\Methods
+ * @link https://msdn.microsoft.com/en-us/library/ff512421.aspx
+ *
  */
 class Translate implements \badams\MicrosoftTranslator\ApiMethodInterface
 {
+    /**
+     * @const Maximum allowable length of text
+     */
+    const TEXT_MAX_LENGTH = 10000;
+
+    /**
+     * @const Html content type, HTML needs to be well-formed.
+     */
+    const CONTENT_TYPE_HTML = 'text/html';
+
+    /**
+     * @const plain text content type
+     */
+    const CONTENT_TYPE_PLAIN = 'text/plain';
+
     /**
      * @var string
      */
@@ -25,17 +44,34 @@ class Translate implements \badams\MicrosoftTranslator\ApiMethodInterface
     protected $from;
 
     /**
+     * @var string
+     */
+    protected $contentType;
+
+    /**
      * Translate constructor.
      * @param $text
      * @param $to
      * @param null $from
+     * @param string $contentType
      */
-    public function __construct($text, $to, $from = null)
+    public function __construct($text, $to, $from = null, $contentType = Translate::CONTENT_TYPE_PLAIN)
     {
         $this->text = $text;
         $this->to = new Language($to);
-        if ($from) {
+
+        if ($from !== null) {
             $this->from = new Language($from);
+        }
+
+        if (!in_array($contentType, [Translate::CONTENT_TYPE_PLAIN, Translate::CONTENT_TYPE_HTML])) {
+            throw new ArgumentException(sprintf('%s is not a valid content type.', $contentType));
+        }
+
+        if (strlen($text) > Translate::TEXT_MAX_LENGTH) {
+            throw new ArgumentException(
+                sprintf('The length of the text must not exceed %s characters.', Translate::TEXT_MAX_LENGTH)
+            );
         }
     }
 
@@ -57,6 +93,7 @@ class Translate implements \badams\MicrosoftTranslator\ApiMethodInterface
                 'text' => $this->text,
                 'to' => (string)$this->to,
                 'from' => (string)$this->from,
+                'contentType' => $this->contentType,
             ]
         ];
     }

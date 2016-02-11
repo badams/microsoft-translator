@@ -38,4 +38,30 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
 
         new Translate('Foo Bar', 'foo');
     }
+
+    public function testMaximumText()
+    {
+        $this->setExpectedException(
+            '\badams\MicrosoftTranslator\Exceptions\ArgumentException',
+            sprintf('The length of the text must not exceed %s characters.', Translate::TEXT_MAX_LENGTH)
+        );
+
+        $text = 'Hello';
+
+        for ($i = 0; $i < Translate::TEXT_MAX_LENGTH; $i++) {
+            $text .= ' World';
+        }
+
+        new Translate($text, 'en');
+    }
+
+    public function testInvalidContentType()
+    {
+        $this->setExpectedException(
+            '\badams\MicrosoftTranslator\Exceptions\ArgumentException',
+            'text/csv is not a valid content type.'
+        );
+
+        new Translate('Hello World', 'fr', 'en', 'text/csv');
+    }
 }
