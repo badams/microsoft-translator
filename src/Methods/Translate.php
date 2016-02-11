@@ -20,7 +20,7 @@ class Translate implements \badams\MicrosoftTranslator\ApiMethodInterface
     protected $to;
 
     /**
-     * @var string|null
+     * @var Language|null
      */
     protected $from;
 

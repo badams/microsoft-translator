@@ -96,7 +96,7 @@ class Language
     }
 
     /**
-     * @return string;
+     * @return string
      */
     public function getEnglishName()
     {
