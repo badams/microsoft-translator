@@ -28,8 +28,6 @@ Alternatively you can add the following to your `composer.json` file.
 
 ## Usage
 
-Translate a string of text from one language to another
-
 ```php
 
 use badams\MicrosoftTranslator\MicrosoftTranslator;
@@ -40,11 +38,35 @@ $clientSecret = 'YOUR_CLIENT_SECRET';
 $translator = new MicrosoftTranslator();
 $translator->setClient($clientId, $clientSecret);
 
-$output = $translator->translate('Hello World!', $to = 'fr', $from = 'en');
+```
 
+Translate a string of text from one language to another
+
+```php
+$output = $translator->translate('Hello World!', $to = 'fr', $from = 'en');
 echo $output; // Salut tout le monde!
 
 ```
+
+Detect the language of a string
+
+```php
+$language = $translator->detect('Salut tout le monde!');
+echo $language; // fr
+echo $language->getEnglishName(); // French
+
+``
+
+Returns a wave or mp3 stream of the passed-in text being spoken in the desired language.
+
+```php
+$data = $translator->speak('Salut tout le monde!', 'fr');
+
+header('Content-Type: audio/mp3');
+echo base64_decode($data);
+
+``
+
 
 ## Testing
 
