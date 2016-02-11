@@ -1,13 +1,24 @@
 {
   "name": "badams/microsoft-translator",
+  "type": "library",
+  "description" : "PHP implementation of Microsoft's Translator API",
+  "keywords": ["translator", "api", "microsoft"],
+  "license": "MIT",
+  "homepage" : "https://github.com/badams/microsoft-translator",
   "authors": [
     {
       "name": "Byron Adams",
       "email": "byron.adams54@gmail.com"
     }
   ],
+  "support": {
+    "issues": "https://github.com/badams/microsoft-translator/issues"
+  },
   "require": {
     "guzzlehttp/guzzle": "~5.0|~4.0"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.2.0"
   },
   "autoload": {
     "psr-4": {
@@ -17,8 +28,5 @@
   },
   "scripts": {
     "test": "./vendor/bin/phpunit --coverage-text --coverage-html=build;"
-  },
-  "require-dev": {
-    "phpunit/phpunit": "~4.2.0"
   }
 }
