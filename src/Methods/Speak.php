@@ -13,6 +13,7 @@
 namespace badams\MicrosoftTranslator\Methods;
 
 use badams\MicrosoftTranslator\Language;
+use badams\MicrosoftTranslator\Exceptions\ArgumentException;
 
 /**
  * Class Speak
@@ -21,6 +22,8 @@ use badams\MicrosoftTranslator\Language;
  */
 class Speak implements \badams\MicrosoftTranslator\ApiMethodInterface
 {
+    const TEXT_MAX_LENGTH = 2000;
+
     const FORMAT_MP3 = 'audio/mp3';
     const FORMAT_WAV = 'audio/wav';
 
@@ -56,6 +59,22 @@ class Speak implements \badams\MicrosoftTranslator\ApiMethodInterface
      */
     public function __construct($text, $language, $format = Speak::FORMAT_MP3, $options = Speak::OPTION_MAX_QUALITY)
     {
+        if (strlen($text) > Speak::TEXT_MAX_LENGTH) {
+            throw new ArgumentException(
+                sprintf('The length of the text must not exceed %s characters.', Speak::TEXT_MAX_LENGTH)
+            );
+        }
+
+        if (!in_array($format, [Speak::FORMAT_MP3, Speak::FORMAT_WAV])) {
+            throw new ArgumentException(sprintf('"%s" is not an accepted format.', $format));
+        }
+
+        if (!in_array($options, [Speak::OPTION_MAX_QUALITY, Speak::OPTION_MIN_SIZE])) {
+            throw new ArgumentException(
+                sprintf('invalid options: "%s"', $options)
+            );
+        }
+
         $this->text = $text;
         $this->language = new Language($language);
         $this->format = $format;

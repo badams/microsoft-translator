@@ -13,6 +13,7 @@
 namespace badams\MicrosoftTranslator\Methods;
 
 use badams\MicrosoftTranslator\Language;
+use badams\MicrosoftTranslator\Exceptions\ArgumentException;
 
 /**
  * Class Detect
@@ -21,6 +22,11 @@ use badams\MicrosoftTranslator\Language;
  */
 class Detect implements \badams\MicrosoftTranslator\ApiMethodInterface
 {
+    /**
+     * @const Maximum allowable length of text
+     */
+    const TEXT_MAX_LENGTH = 10000;
+
     /**
      * @var string
      */
@@ -33,6 +39,12 @@ class Detect implements \badams\MicrosoftTranslator\ApiMethodInterface
     public function __construct($text)
     {
         $this->text = $text;
+
+        if (strlen($this->text) > Detect::TEXT_MAX_LENGTH) {
+            throw new ArgumentException(
+                sprintf('The length of the text must not exceed %s characters.', Detect::TEXT_MAX_LENGTH)
+            );
+        }
     }
 
     /**
@@ -60,6 +72,4 @@ class Detect implements \badams\MicrosoftTranslator\ApiMethodInterface
         $xml = (array)simplexml_load_string($response->getBody()->getContents());
         return new Language((string)$xml[0]);
     }
-
-
 }

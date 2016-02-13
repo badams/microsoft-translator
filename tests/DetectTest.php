@@ -2,6 +2,7 @@
 
 namespace badams\MicrosoftTranslator\Tests;
 
+use badams\MicrosoftTranslator\Methods\Detect;
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;
@@ -29,6 +30,22 @@ class DetectTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('\badams\MicrosoftTranslator\Language', $result);
         $this->assertEquals('en', (string)$result);
         $this->assertEquals('English', $result->getEnglishName());
+    }
+
+    public function testInvalidTextLength()
+    {
+        $this->setExpectedException(
+            '\badams\MicrosoftTranslator\Exceptions\ArgumentException',
+            sprintf('The length of the text must not exceed %s characters.', Detect::TEXT_MAX_LENGTH)
+        );
+
+        $text = 'Hello';
+
+        for ($i = 0; $i < Detect::TEXT_MAX_LENGTH; $i++) {
+            $text .= ' World';
+        }
+
+        new Detect($text);
     }
 
 }
