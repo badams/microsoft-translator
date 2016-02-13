@@ -65,20 +65,40 @@ class Speak implements \badams\MicrosoftTranslator\ApiMethodInterface
             );
         }
 
+        $this->text = $text;
+        $this->language = new Language($language);
+        $this->format = $this->validateFormat($format);
+        $this->options = $this->validateOptions($options);
+    }
+
+    /**
+     * @param $format
+     * @return mixed
+     * @throws ArgumentException
+     */
+    public function validateFormat($format)
+    {
         if (!in_array($format, [Speak::FORMAT_MP3, Speak::FORMAT_WAV])) {
             throw new ArgumentException(sprintf('"%s" is not an accepted format.', $format));
         }
 
+        return $format;
+    }
+
+    /**
+     * @param $options
+     * @return mixed
+     * @throws ArgumentException
+     */
+    public function validateOptions($options)
+    {
         if (!in_array($options, [Speak::OPTION_MAX_QUALITY, Speak::OPTION_MIN_SIZE])) {
             throw new ArgumentException(
                 sprintf('invalid options: "%s"', $options)
             );
         }
 
-        $this->text = $text;
-        $this->language = new Language($language);
-        $this->format = $format;
-        $this->options = $options;
+        return $options;
     }
 
     /**

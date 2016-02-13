@@ -118,6 +118,11 @@ class MicrosoftTranslator
         return $this->accessToken;
     }
 
+    /**
+     * @param ApiMethodInterface $method
+     * @return \GuzzleHttp\Message\Request|\GuzzleHttp\Message\RequestInterface
+     * @throws AuthException
+     */
     private function createRequest(ApiMethodInterface $method)
     {
         $reflection = new \ReflectionClass($method);
