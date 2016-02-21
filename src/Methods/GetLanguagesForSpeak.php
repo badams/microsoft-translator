@@ -48,7 +48,7 @@ class GetLanguagesForSpeak implements \badams\MicrosoftTranslator\ApiMethodInter
         $languages = [];
 
         foreach ($xml->string as $language) {
-           $languages[] = (string) $language;
+            $languages[] = (string)$language;
         }
 
         return $languages;
