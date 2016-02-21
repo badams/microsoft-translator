@@ -2,9 +2,7 @@
 
 namespace badams\MicrosoftTranslator\Tests;
 
-use badams\MicrosoftTranslator\Language;
 use badams\MicrosoftTranslator\Methods\GetLanguageNames;
-use badams\MicrosoftTranslator\Methods\Speak;
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
 use GuzzleHttp\Message\Response;

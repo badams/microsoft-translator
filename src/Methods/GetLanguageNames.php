@@ -60,8 +60,10 @@ class GetLanguageNames implements \badams\MicrosoftTranslator\ApiMethodInterface
 
         $languages = [];
 
+        var_dump($xml->string); // XXX debuging travis build
+
         foreach ($xml->string as $language) {
-            if (!empty($language)) {
+            if (!empty((string)$language)) {
                 $languages[] = (string)$language;
             }
         }
