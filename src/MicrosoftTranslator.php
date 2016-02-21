@@ -18,6 +18,8 @@ use badams\MicrosoftTranslator\Exceptions\QuotaExceededException;
 use badams\MicrosoftTranslator\Exceptions\TokenExpiredException;
 use badams\MicrosoftTranslator\Exceptions\TranslatorException;
 use badams\MicrosoftTranslator\Methods\Detect;
+use badams\MicrosoftTranslator\Methods\GetLanguageNames;
+use badams\MicrosoftTranslator\Methods\GetLanguagesForSpeak;
 use badams\MicrosoftTranslator\Methods\Speak;
 use badams\MicrosoftTranslator\Methods\Translate;
 use GuzzleHttp\Exception\RequestException;
@@ -229,5 +231,25 @@ class MicrosoftTranslator
     public function speak($text, $language, $format = Speak::FORMAT_MP3, $options = Speak::OPTION_MAX_QUALITY)
     {
         return $this->execute(new Speak($text, $language, $format, $options));
+    }
+
+    /**
+     * @return Language[]
+     * @throws TranslatorException
+     */
+    public function getLanguagesForSpeak()
+    {
+        return $this->execute(new GetLanguagesForSpeak());
+    }
+
+    /**
+     * @param $languageCodes
+     * @param string $locale
+     * @return mixed
+     * @throws TranslatorException
+     */
+    public function getLanguageNames($languageCodes, $locale = Language::ENGLISH)
+    {
+        return $this->execute(new GetLanguageNames($locale, $languageCodes));
     }
 }
