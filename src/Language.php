@@ -21,8 +21,11 @@ use badams\MicrosoftTranslator\Exceptions\UnsupportedLanguageException;
 class Language
 {
     const ARABIC = 'ar';
+    const BOSNIAN_LATIN = 'bs-latn';
     const BULGARIAN = 'bg';
     const CATALAN = 'ca';
+    const CHINESE_SIMPLIFIED = 'zh-chs';
+    const CHINESE_TRADITIONAL = 'zh-cht';
     const CROATIAN = 'hr';
     const CZECH = 'cs';
     const DANISH = 'da';
@@ -43,6 +46,7 @@ class Language
     const JAPANESE = 'ja';
     const KISWAHILI = 'sw';
     const KLINGON = 'tlh';
+    const KLINGON_PIQAD = 'tlh-qaak';
     const KOREAN = 'ko';
     const LATVIAN = 'lv';
     const LITHUANIAN = 'lt';
@@ -55,6 +59,8 @@ class Language
     const QUERETARO_OTOMI = 'otq';
     const ROMANIAN = 'ro';
     const RUSSIAN = 'ru';
+    const SERBIAN_CYRILLIC = 'sr-cyrl';
+    const SERBIAN_LATIN = 'sr-latn';
     const SLOVAK = 'sk';
     const SLOVENIAN = 'sl';
     const SPANISH = 'es';
@@ -79,8 +85,11 @@ class Language
      */
     private $languages = [
         self::ARABIC => 'Arabic',
+        self::BOSNIAN_LATIN => 'Bosnian (Latin)',
         self::BULGARIAN => 'Bulgarian',
         self::CATALAN => 'Catalan',
+        self::CHINESE_SIMPLIFIED => 'Chinese Simplified',
+        self::CHINESE_TRADITIONAL => 'Chinese Traditional',
         self::CROATIAN => 'Croatian',
         self::CZECH => 'Czech',
         self::DANISH => 'Danish',
@@ -101,6 +110,7 @@ class Language
         self::JAPANESE => 'Japanese',
         self::KISWAHILI => 'Kiswahili',
         self::KLINGON => 'Klingon',
+        self::KLINGON_PIQAD => 'Klingon (pIqaD)',
         self::KOREAN => 'Korean',
         self::LATVIAN => 'Latvian',
         self::LITHUANIAN => 'Lithuanian',
@@ -113,6 +123,8 @@ class Language
         self::QUERETARO_OTOMI => 'Querétaro Otomi',
         self::ROMANIAN => 'Romanian',
         self::RUSSIAN => 'Russian',
+        self::SERBIAN_CYRILLIC => 'Serbian (Cyrillic)',
+        self::SERBIAN_LATIN => 'Serbian (Latin)',
         self::SLOVAK => 'Slovak',
         self::SLOVENIAN => 'Slovenian',
         self::SPANISH => 'Spanish',
