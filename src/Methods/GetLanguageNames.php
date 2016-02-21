@@ -57,14 +57,12 @@ class GetLanguageNames implements \badams\MicrosoftTranslator\ApiMethodInterface
     public function processResponse(\GuzzleHttp\Message\ResponseInterface $response)
     {
         $xml = simplexml_load_string($response->getBody()->getContents());
-
         $languages = [];
 
-        var_dump($xml->string); // XXX debuging travis build
-
         foreach ($xml->string as $language) {
-            if (!empty((string)$language)) {
-                $languages[] = (string)$language;
+            $language = (string)$language;
+            if (!empty($language)) {
+                $languages[] = $language;
             }
         }
 
