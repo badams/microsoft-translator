@@ -38,6 +38,7 @@ XML;
 
         $languages = $translator->getLanguageNames(['en', 'de', 'fr']);
         $this->assertTrue(is_array($languages));
+        $this->assertEquals(3, count($languages));
         $this->assertEquals('English', $languages[0]);
         $this->assertEquals('German', $languages[1]);
         $this->assertEquals('French', $languages[2]);
