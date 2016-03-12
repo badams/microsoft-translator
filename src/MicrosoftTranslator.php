@@ -21,8 +21,10 @@ use badams\MicrosoftTranslator\Methods\Detect;
 use badams\MicrosoftTranslator\Methods\GetLanguageNames;
 use badams\MicrosoftTranslator\Methods\GetLanguagesForSpeak;
 use badams\MicrosoftTranslator\Methods\GetLanguagesForTranslate;
+use badams\MicrosoftTranslator\Methods\GetTranslations;
 use badams\MicrosoftTranslator\Methods\Speak;
 use badams\MicrosoftTranslator\Methods\Translate;
+use badams\MicrosoftTranslator\Responses\GetTranslationsResponse;
 use GuzzleHttp\Exception\RequestException;
 
 /**
@@ -261,5 +263,19 @@ class MicrosoftTranslator
     public function getLanguagesForTranslate()
     {
         return $this->execute(new GetLanguagesForTranslate());
+    }
+
+    /**
+     * @param $text
+     * @param $to
+     * @param $from
+     * @param null $maxTranslations
+     * @param TranslateOptions|null $options
+     * @return mixed
+     * @throws TranslatorException
+     */
+    public function getTranslations($text, $to, $from, $maxTranslations = 5, TranslateOptions $options = null)
+    {
+        return $this->execute(new GetTranslations($text, $to, $from, $maxTranslations,  $options));
     }
 }
