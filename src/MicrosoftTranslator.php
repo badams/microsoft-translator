@@ -20,6 +20,7 @@ use badams\MicrosoftTranslator\Exceptions\TranslatorException;
 use badams\MicrosoftTranslator\Methods\Detect;
 use badams\MicrosoftTranslator\Methods\GetLanguageNames;
 use badams\MicrosoftTranslator\Methods\GetLanguagesForSpeak;
+use badams\MicrosoftTranslator\Methods\GetLanguagesForTranslate;
 use badams\MicrosoftTranslator\Methods\Speak;
 use badams\MicrosoftTranslator\Methods\Translate;
 use GuzzleHttp\Exception\RequestException;
@@ -251,5 +252,14 @@ class MicrosoftTranslator
     public function getLanguageNames($languageCodes, $locale = Language::ENGLISH)
     {
         return $this->execute(new GetLanguageNames($locale, $languageCodes));
+    }
+
+    /**
+     * @return Language[]
+     * @throws TranslatorException
+     */
+    public function getLanguagesForTranslate()
+    {
+        return $this->execute(new GetLanguagesForTranslate());
     }
 }
