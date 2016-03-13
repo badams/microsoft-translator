@@ -13,6 +13,7 @@
 namespace badams\MicrosoftTranslator\Methods;
 
 use badams\MicrosoftTranslator\Exceptions\ArgumentException;
+use badams\MicrosoftTranslator\Exceptions\UnsupportedLanguageException;
 use badams\MicrosoftTranslator\Language;
 use badams\MicrosoftTranslator\Responses\GetTranslationsResponse;
 use badams\MicrosoftTranslator\TranslateOptions;
@@ -56,11 +57,14 @@ class GetTranslations implements \badams\MicrosoftTranslator\ApiMethodInterface
     protected $options;
 
     /**
-     * Translate constructor.
+     * GetTranslations constructor.
      * @param $text
      * @param $to
-     * @param null $from
-     * @param string $contentType
+     * @param $from
+     * @param int $maxTranslations
+     * @param TranslateOptions|null $options
+     * @throws ArgumentException
+     * @throws UnsupportedLanguageException
      */
     public function __construct($text, $to, $from, $maxTranslations = 5, TranslateOptions $options = null)
     {

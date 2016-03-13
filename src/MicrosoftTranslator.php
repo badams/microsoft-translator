@@ -276,6 +276,6 @@ class MicrosoftTranslator
      */
     public function getTranslations($text, $to, $from, $maxTranslations = 5, TranslateOptions $options = null)
     {
-        return $this->execute(new GetTranslations($text, $to, $from, $maxTranslations,  $options));
+        return $this->execute(new GetTranslations($text, $to, $from, $maxTranslations, $options));
     }
 }
