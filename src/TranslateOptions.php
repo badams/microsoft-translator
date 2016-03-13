@@ -96,12 +96,13 @@ class TranslateOptions
     }
 
     /**
-     * @return string
+     * @param string $root
+     * @return \DOMDocument
      */
-    public function xml()
+    public function xml($root = 'TranslateOptions')
     {
         $xml = new \DOMDocument();
-        $options = $xml->createElementNS(self::XML_NAMESPACE_URI, 'TranslateOptions');
+        $options = $xml->createElementNS(self::XML_NAMESPACE_URI, $root);
 
         $options->appendChild($xml->createElement('Category', $this->category));
         $options->appendChild($xml->createElement('ContentType', $this->contentType));
@@ -111,6 +112,15 @@ class TranslateOptions
         $options->appendChild($xml->createElement('User', $this->user));
 
         $xml->appendChild($options);
-        return $xml->saveXML();
+
+        return $xml;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->xml()->saveXML();
     }
 }

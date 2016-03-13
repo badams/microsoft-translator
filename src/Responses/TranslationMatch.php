@@ -45,18 +45,24 @@ class TranslationMatch
     protected $translatedText;
 
     /**
+     * @var string
+     */
+    protected $matchedOriginalText;
+
+    /**
      * TranslationMatch constructor.
      * @param $count
      * @param $matchDegree
      * @param $rating
      * @param $translatedText
      */
-    public function __construct($count, $matchDegree, $rating, $translatedText, $error = null)
+    public function __construct($count, $matchDegree, $rating, $translatedText, $matchedOriginalText = null, $error = null)
     {
         $this->count = (int)$count;
         $this->matchDegree = (int)$matchDegree;
         $this->rating = (int)$rating;
         $this->translatedText = $translatedText;
+        $this->matchedOriginalText = $matchedOriginalText;
         $this->error = $error;
     }
 
@@ -70,7 +76,8 @@ class TranslationMatch
             (string)$xml->Count,
             (string)$xml->MatchDegree,
             (string)$xml->Rating,
-            (string)$xml->TranslatedText
+            (string)$xml->TranslatedText,
+            (string)$xml->MatchedOriginalText
         );
     }
 
@@ -112,5 +119,10 @@ class TranslationMatch
     public function getError()
     {
         return $this->error;
+    }
+
+    public function getMatchedOriginalText()
+    {
+        return $this->matchedOriginalText;
     }
 }

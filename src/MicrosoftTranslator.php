@@ -22,6 +22,7 @@ use badams\MicrosoftTranslator\Methods\GetLanguageNames;
 use badams\MicrosoftTranslator\Methods\GetLanguagesForSpeak;
 use badams\MicrosoftTranslator\Methods\GetLanguagesForTranslate;
 use badams\MicrosoftTranslator\Methods\GetTranslations;
+use badams\MicrosoftTranslator\Methods\GetTranslationsArray;
 use badams\MicrosoftTranslator\Methods\Speak;
 use badams\MicrosoftTranslator\Methods\Translate;
 use badams\MicrosoftTranslator\Responses\GetTranslationsResponse;
@@ -271,11 +272,25 @@ class MicrosoftTranslator
      * @param $from
      * @param null $maxTranslations
      * @param TranslateOptions|null $options
-     * @return mixed
+     * @return GetTranslationsResponse
      * @throws TranslatorException
      */
     public function getTranslations($text, $to, $from, $maxTranslations = 5, TranslateOptions $options = null)
     {
         return $this->execute(new GetTranslations($text, $to, $from, $maxTranslations, $options));
+    }
+
+    /**
+     * @param $texts
+     * @param $to
+     * @param $from
+     * @param int $maxTranslations
+     * @param TranslateOptions|null $options
+     * @return GetTranslationsResponse[]
+     * @throws TranslatorException
+     */
+    public function getTranslationsArray($texts, $to, $from, $maxTranslations = 5, TranslateOptions $options = null)
+    {
+        return $this->execute(new GetTranslationsArray($texts, $to, $from, $maxTranslations, $options));
     }
 }

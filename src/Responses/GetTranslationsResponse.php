@@ -54,8 +54,8 @@ class GetTranslationsResponse
     {
         $instance = new GetTranslationsResponse($xml->From, $xml->State);
 
-        foreach ($xml->Translations as $match) {
-            $instance->addTranslation(TranslationMatch::fromXmlElement($match->TranslationMatch));
+        foreach ($xml->Translations->TranslationMatch as $match) {
+            $instance->addTranslation(TranslationMatch::fromXmlElement($match));
         }
 
         return $instance;

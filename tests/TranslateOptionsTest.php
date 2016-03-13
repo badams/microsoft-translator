@@ -66,7 +66,7 @@ class TranslateOptionsTest extends \PHPUnit_Framework_TestCase
             'flag'
         );
 
-        $xml = simplexml_load_string($options->xml());
+        $xml = simplexml_load_string((string)$options);
 
         $this->assertEquals('general', (string)$xml->Category);
         $this->assertEquals(TranslateOptions::CONTENT_TYPE_PLAIN, (string)$xml->ContentType);

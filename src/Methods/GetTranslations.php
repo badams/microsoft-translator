@@ -95,7 +95,7 @@ class GetTranslations implements \badams\MicrosoftTranslator\ApiMethodInterface
     public function getRequestOptions()
     {
         return [
-            'body' => $this->options->xml(),
+            'body' => (string)$this->options,
             'query' => [
                 'text' => $this->text,
                 'to' => (string)$this->to,
