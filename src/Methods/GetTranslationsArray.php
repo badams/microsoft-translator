@@ -75,7 +75,7 @@ class GetTranslationsArray implements \badams\MicrosoftTranslator\ApiMethodInter
         $this->from = new Language($from);
         $this->maxTranslations = $maxTranslations;
         $this->options = $options ? $options : new TranslateOptions();
-        
+
         $this->assertTextsIsArray();
         $this->assertTextsCount();
         $this->assertTextsLength();
@@ -142,11 +142,17 @@ class GetTranslationsArray implements \badams\MicrosoftTranslator\ApiMethodInter
         $root->appendChild($xml->createElement('AppId'));
         $root->appendChild($xml->createElement('From', $this->from));
 
-        $options = $xml->importNode($this->options->xml('Options')->childNodes->item(0), true);
+        $this->appendOptionsNode($xml, $root);
+        $this->appendTextsNode($xml, $root);
+        
+        $root->appendChild($xml->createElement('To', $this->to));
+        $root->appendChild($xml->createElement('MaxTranslations', $this->maxTranslations));
 
-        $root->appendChild($options);
+        return $xml->saveXML();
+    }
 
-
+    protected function appendTextsNode(\DOMDocument $xml, \DOMNode $root)
+    {
         $texts = $xml->createElement('Texts');
         $root->appendChild($texts);
 
@@ -155,11 +161,13 @@ class GetTranslationsArray implements \badams\MicrosoftTranslator\ApiMethodInter
                 $xml->createElementNS('http://schemas.microsoft.com/2003/10/Serialization/Arrays', 'string', $text)
             );
         }
+    }
 
-        $root->appendChild($xml->createElement('To', $this->to));
-        $root->appendChild($xml->createElement('MaxTranslations', $this->maxTranslations));
-
-        return $xml->saveXML();
+    protected function appendOptionsNode(\DOMDocument $xml, \DOMNode $root)
+    {
+        $node = $this->options->xml('Options')->childNodes->item(0);
+        $options = $xml->importNode($node, true);
+        $root->appendChild($options);
     }
 
     /**
