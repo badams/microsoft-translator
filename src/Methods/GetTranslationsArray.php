@@ -70,25 +70,47 @@ class GetTranslationsArray implements \badams\MicrosoftTranslator\ApiMethodInter
      */
     public function __construct($texts, $to, $from, $maxTranslations = 5, TranslateOptions $options = null)
     {
-        if (!is_array($texts)) {
-            throw new ArgumentException('texts must be an array');
-        }
-
-        if (count($texts) > self::MAX_TEXTS) {
-            throw new ArgumentException(sprintf('Amount of texts cannot exceed %s', self::MAX_TEXTS));
-        }
-
-        $textLengths = array_map('strlen', $texts);
-
-        if (array_sum($textLengths) > self::TEXT_MAX_LENGTH) {
-            throw new ArgumentException(sprintf('Total length of texts cannot exceed %s', self::TEXT_MAX_LENGTH));
-        }
-
         $this->texts = $texts;
         $this->to = new Language($to);
         $this->from = new Language($from);
         $this->maxTranslations = $maxTranslations;
         $this->options = $options ? $options : new TranslateOptions();
+        
+        $this->assertTextsIsArray();
+        $this->assertTextsCount();
+        $this->assertTextsLength();
+    }
+
+    /**
+     * @throws ArgumentException
+     */
+    protected function assertTextsIsArray()
+    {
+        if (!is_array($this->texts)) {
+            throw new ArgumentException('texts must be an array');
+        }
+    }
+
+    /**
+     * @throws ArgumentException
+     */
+    protected function assertTextsCount()
+    {
+        if (count($this->texts) > self::MAX_TEXTS) {
+            throw new ArgumentException(sprintf('Amount of texts cannot exceed %s', self::MAX_TEXTS));
+        }
+    }
+
+    /**
+     * @throws ArgumentException
+     */
+    protected function assertTextsLength()
+    {
+        $textLengths = array_map('strlen', $this->texts);
+
+        if (array_sum($textLengths) > self::TEXT_MAX_LENGTH) {
+            throw new ArgumentException(sprintf('Total length of texts cannot exceed %s', self::TEXT_MAX_LENGTH));
+        }
     }
 
     /**

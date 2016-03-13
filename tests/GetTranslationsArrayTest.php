@@ -154,7 +154,7 @@ XML;
             '\badams\MicrosoftTranslator\Exceptions\ArgumentException',
             'Total length of texts cannot exceed '.GetTranslationsArray::TEXT_MAX_LENGTH
         );
-        
+
         $text = str_pad('', 2000, 'Hello world! ');
         $texts = array_pad([], 6, $text);
 
