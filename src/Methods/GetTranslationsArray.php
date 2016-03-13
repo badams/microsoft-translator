@@ -144,13 +144,17 @@ class GetTranslationsArray implements \badams\MicrosoftTranslator\ApiMethodInter
 
         $this->appendOptionsNode($xml, $root);
         $this->appendTextsNode($xml, $root);
-        
+
         $root->appendChild($xml->createElement('To', $this->to));
         $root->appendChild($xml->createElement('MaxTranslations', $this->maxTranslations));
 
         return $xml->saveXML();
     }
 
+    /**
+     * @param \DOMDocument $xml
+     * @param \DOMNode $root
+     */
     protected function appendTextsNode(\DOMDocument $xml, \DOMNode $root)
     {
         $texts = $xml->createElement('Texts');
@@ -163,6 +167,10 @@ class GetTranslationsArray implements \badams\MicrosoftTranslator\ApiMethodInter
         }
     }
 
+    /**
+     * @param \DOMDocument $xml
+     * @param \DOMNode $root
+     */
     protected function appendOptionsNode(\DOMDocument $xml, \DOMNode $root)
     {
         $node = $this->options->xml('Options')->childNodes->item(0);
@@ -186,5 +194,4 @@ class GetTranslationsArray implements \badams\MicrosoftTranslator\ApiMethodInter
 
         return $responses;
     }
-
 }
