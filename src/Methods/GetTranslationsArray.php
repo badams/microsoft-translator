@@ -18,7 +18,6 @@ use badams\MicrosoftTranslator\Language;
 use badams\MicrosoftTranslator\Responses\GetTranslationsResponse;
 use badams\MicrosoftTranslator\TranslateOptions;
 
-
 /**
  * Class GetTranslationsArray
  * @package badams\MicrosoftTranslator\Methods

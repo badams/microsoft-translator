@@ -1,9 +1,8 @@
 <?php
 
-namespace badams\MicrosoftTranslator\Tests;
+namespace badams\MicrosoftTranslator\tests;
 
 use badams\MicrosoftTranslator\Language;
-
 
 class LanguageTest extends \PHPUnit_Framework_TestCase
 {
@@ -22,7 +21,5 @@ class LanguageTest extends \PHPUnit_Framework_TestCase
         );
 
         new Language('foo');
-
     }
-
 }

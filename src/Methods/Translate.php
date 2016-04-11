@@ -117,6 +117,4 @@ class Translate implements \badams\MicrosoftTranslator\ApiMethodInterface
         $xml = (array)simplexml_load_string($response->getBody()->getContents());
         return (string)$xml[0];
     }
-
-
 }

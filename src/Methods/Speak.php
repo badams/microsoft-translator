@@ -130,6 +130,4 @@ class Speak implements \badams\MicrosoftTranslator\ApiMethodInterface
     {
         return base64_encode($response->getBody()->getContents());
     }
-
-
 }

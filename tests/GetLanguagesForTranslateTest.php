@@ -1,6 +1,6 @@
 <?php
 
-namespace badams\MicrosoftTranslator\Tests;
+namespace badams\MicrosoftTranslator\tests;
 
 use badams\MicrosoftTranslator\Language;
 use GuzzleHttp\Client;

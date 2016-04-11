@@ -1,6 +1,6 @@
 <?php
 
-namespace badams\MicrosoftTranslator\Tests;
+namespace badams\MicrosoftTranslator\tests;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
@@ -30,7 +30,6 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $clientSecret = $reflection->getProperty('clientSecret');
         $clientSecret->setAccessible(true);
         $this->assertEquals('client_secret', $clientSecret->getValue($translator));
-
     }
 
     public function testInvalidClient()
@@ -58,6 +57,4 @@ class AuthTest extends \PHPUnit_Framework_TestCase
         $accessToken->setAccessible(true);
         $accessToken->invoke($translator);
     }
-
-
 }

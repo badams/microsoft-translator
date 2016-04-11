@@ -1,6 +1,6 @@
 <?php
 
-namespace badams\MicrosoftTranslator\Tests;
+namespace badams\MicrosoftTranslator\tests;
 
 use badams\MicrosoftTranslator\Methods\Detect;
 use GuzzleHttp\Client;
@@ -47,5 +47,4 @@ class DetectTest extends \PHPUnit_Framework_TestCase
 
         new Detect($text);
     }
-
 }

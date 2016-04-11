@@ -1,9 +1,8 @@
 <?php
 
-namespace badams\MicrosoftTranslator\Tests;
+namespace badams\MicrosoftTranslator\tests;
 
 use badams\MicrosoftTranslator\TranslateOptions;
-
 
 class TranslateOptionsTest extends \PHPUnit_Framework_TestCase
 {

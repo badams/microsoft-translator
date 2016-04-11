@@ -18,5 +18,4 @@ namespace badams\MicrosoftTranslator\Exceptions;
  */
 class QuotaExceededException extends TranslatorException
 {
-
 }

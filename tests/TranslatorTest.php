@@ -1,6 +1,6 @@
 <?php
 
-namespace badams\MicrosoftTranslator\Tests;
+namespace badams\MicrosoftTranslator\tests;
 
 use GuzzleHttp\Client;
 use GuzzleHttp\Subscriber\Mock;
@@ -103,7 +103,3 @@ class TranslatorTest extends \PHPUnit_Framework_TestCase
         $translator->translate('Hello', 'en', 'de');
     }
 }
-
-
-
-

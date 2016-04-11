@@ -1,6 +1,6 @@
 <?php
 
-namespace badams\MicrosoftTranslator\Tests;
+namespace badams\MicrosoftTranslator\tests;
 
 use badams\MicrosoftTranslator\Methods\GetTranslations;
 use badams\MicrosoftTranslator\TranslateOptions;
@@ -79,7 +79,6 @@ XML;
         $results = $translator->getTranslations('Hello', 'de', 'en', 5, $options);
 
         $this->assertEquals('Foo', $results->getState());
-
     }
 
     public function testInvalidToLanguage()

@@ -81,8 +81,7 @@ class TranslateOptions
         $uri = null,
         $user = null,
         $reservedFlag = null
-    )
-    {
+    ) {
         if ($contentType !== self::CONTENT_TYPE_PLAIN) {
             throw new ArgumentException(sprintf('%s is not a valid content type.', $contentType));
         }

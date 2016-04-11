@@ -11,6 +11,7 @@
  */
 
 namespace badams\MicrosoftTranslator\Responses;
+
 use badams\MicrosoftTranslator\Language;
 
 /**
