@@ -18,15 +18,17 @@
     "guzzlehttp/guzzle": "~5.0|~4.0"
   },
   "require-dev": {
-    "phpunit/phpunit": "~4.2.0"
+    "phpunit/phpunit": "~4.2.0",
+    "fabpot/php-cs-fixer": "^1.11"
   },
   "autoload": {
     "psr-4": {
       "badams\\MicrosoftTranslator\\": "src/",
-      "badams\\MicrosoftTranslator\\Tests\\" : "tests/"
+      "badams\\MicrosoftTranslator\\tests\\" : "tests/"
     }
   },
   "scripts": {
-    "test": "./vendor/bin/phpunit --coverage-text --coverage-html=build;"
+    "test": "./vendor/bin/phpunit --coverage-text --coverage-html=build;",
+    "php-cs-fixer" : "./vendor/bin/php-cs-fixer fix ."
   }
 }
