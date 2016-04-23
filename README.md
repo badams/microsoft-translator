@@ -3,14 +3,15 @@
 [![Coverage Status](https://img.shields.io/scrutinizer/coverage/g/badams/microsoft-translator.svg?style=flat-square)](https://scrutinizer-ci.com/g/badams/microsoft-translator/code-structure)
 [![Quality Score](https://img.shields.io/scrutinizer/g/badams/microsoft-translator.svg?style=flat-square)](https://scrutinizer-ci.com/g/badams/microsoft-translator)
 
-MicrosoftTranslator - An easy to use PHP implementation of [Microsoft's Translator API](https://msdn.microsoft.com/en-us/library/ff512419.aspx)
-================================
+MicrosoftTranslator 
+====================
+#### An easy to use PHP implementation of [Microsoft's Translator API](https://msdn.microsoft.com/en-us/library/ff512419.aspx)
 
 The goal of this project is to provide a modern, elegant, and feature complete implementation of the Microsoft Translation HTTP API to PHP developers.
 
 ## Currently supported methods
 
- - Translate: Converts a text string from one language to another.
+ - [Translate](docs/translate.md): Converts a string of text from one language to another.
  - Detect: Detects the language of a selection of text.
  - Speak: Returns a string with a URL to a wave stream of the passed in text in desired language.
  - GetLanguagesForSpeak: Obtains a list of the language codes supported by the Translator Service for speech synthesis.
@@ -21,13 +22,14 @@ The goal of this project is to provide a modern, elegant, and feature complete i
 
 ## Roadmap
 
-API methods that are yet to be implemented
+API methods that are yet to be implemented.
 
- - TranslateArray
- - DetectArray
- - TransformText
- - AddTranslation
- - AddTranslationArray
+ - [TranslateArray](https://msdn.microsoft.com/en-us/library/ff512422.aspx)
+ - [DetectArray](https://msdn.microsoft.com/en-us/library/ff512412.aspx)
+ - [TransformText](https://msdn.microsoft.com/en-us/library/dn876735.aspx)
+ - [AddTranslation](https://msdn.microsoft.com/en-us/library/ff512408.aspx)
+ - [AddTranslationArray](https://msdn.microsoft.com/en-us/library/ff512409.aspx)
+ - [BreakSentences](https://msdn.microsoft.com/en-us/library/ff512410.aspx)
 
 ## Installation
 
@@ -76,5 +78,5 @@ $ composer test
 
 ## License
 
-The MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
+MicrosoftTranslator is open-sourced software licensed under the MIT License (MIT). Please see [LICENSE](LICENSE) for more information.
 
