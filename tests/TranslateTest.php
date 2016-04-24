@@ -29,6 +29,25 @@ class TranslateTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals('Hallo', $translator->translate('Hello', 'de', 'en'));
     }
 
+    public function testSuccessfulTranslateHtml()
+    {
+        $client = new Client();
+
+        $content = Stream::factory('{"access_token":"123"}');
+
+        $mock = new Mock([
+            new Response(200, [], $content),
+            new Response(200, [], Stream::factory('<string>&lt;p&gt;Bonjour &lt;em&gt;monde!&lt;/em&gt;&lt;/p&gt;</string>')),
+        ]);
+
+        $client->getEmitter()->attach($mock);
+
+        $translator = new \badams\MicrosoftTranslator\MicrosoftTranslator($client);
+        $translator->setClient('client_id', 'client_secret');
+        $result = $translator->translate('<p>Hello <em>world!</em></p>', 'fr', 'en', Translate::CONTENT_TYPE_HTML);
+        $this->assertEquals('<p>Bonjour <em>monde!</em></p>', $result);
+    }
+
     public function testInvalidLanguage()
     {
         $this->setExpectedException(

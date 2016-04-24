@@ -204,14 +204,19 @@ class MicrosoftTranslator
     }
 
     /**
-     * @param $text
-     * @param $to
-     * @param $from
-     * @return null|string
+     * Converts a string of text from one language to another.
+     *
+     * @param $text string
+     * @param $to string|Language
+     * @param $from string|Language
+     * @param $contentType string
+     * @return string A string representing the translated text.
+     *
+     * @throws TranslatorException
      */
-    public function translate($text, $to, $from = null)
+    public function translate($text, $to, $from = null, $contentType = Translate::CONTENT_TYPE_PLAIN)
     {
-        return $this->execute(new Translate($text, $to, $from));
+        return $this->execute(new Translate($text, $to, $from, $contentType));
     }
 
     /**
