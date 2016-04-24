@@ -4,7 +4,7 @@
 
 **Implemented enhancements:**
 
-- Added a Changelog
+- Added a Changelog [\#6bf45db](https://github.com/badams/microsoft-translator/commit/6bf45db8c376d3562f4f893dd2211df676a98d8b)
 - Added documentation for `translate` method [\#d210bc7](https://github.com/badams/microsoft-translator/commit/d210bc73f1b0bd427c8f637bd7e97670afb324b8)
 - Updated README to be more informative [\#023c476](https://github.com/badams/microsoft-translator/commit/023c47607159087cba3e7c1801cad394fea51166)
 - Enforcing PSR2 compliance using `php-cs-fixer` [\#b272e30](https://github.com/badams/microsoft-translator/commit/b272e307c4d85a5e76d67a2f9ab5907306d51d18)
