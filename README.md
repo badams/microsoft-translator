@@ -12,8 +12,8 @@ The goal of this project is to provide a modern, elegant, and feature complete i
 ## Currently supported methods
 
  - [Translate](docs/translate.md): Converts a string of text from one language to another.
- - Detect: Detects the language of a selection of text.
- - Speak: Returns a string with a URL to a wave stream of the passed in text in desired language.
+ - [Detect](docs/detect.md): Detects the language of a selection of text.
+ - [Speak](docs/speak.md): Generates a wave form of synthesised speech from the given text/language combination.
  - GetLanguagesForSpeak: Obtains a list of the language codes supported by the Translator Service for speech synthesis.
  - GetLanguageNames: Retrieves localized names for the languages passed to it.
  - GetLanguagesForTranslate: Obtains a list of the language codes supported by the Translator Service.
