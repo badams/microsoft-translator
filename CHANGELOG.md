@@ -4,6 +4,8 @@
 
 **Implemented enhancements:**
 
+- Added documentation for Speak method [\#551c0bc](https://github.com/badams/microsoft-translator/commit/551c0bcf2f8ea8eb4dc908293e7fdd9ce1440b7f)
+- Added documentation for Detect method [\#b8d3620](https://github.com/badams/microsoft-translator/commit/b8d3620b50fa5ec65df9d71c58485a899ada3cd2)
 - Added a Changelog [\#6bf45db](https://github.com/badams/microsoft-translator/commit/6bf45db8c376d3562f4f893dd2211df676a98d8b)
 - Added documentation for `translate` method [\#d210bc7](https://github.com/badams/microsoft-translator/commit/d210bc73f1b0bd427c8f637bd7e97670afb324b8)
 - Updated README to be more informative [\#023c476](https://github.com/badams/microsoft-translator/commit/023c47607159087cba3e7c1801cad394fea51166)
